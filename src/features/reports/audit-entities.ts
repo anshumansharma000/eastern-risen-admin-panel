@@ -1,3 +1,4 @@
+import { recordHref } from "@/lib/routes";
 import { getResource, safeId } from "@/lib/api/client";
 import type { CoreUser } from "@/lib/api/contracts";
 import { resolveAuditActor } from "./audit-actors";
@@ -101,7 +102,7 @@ export async function loadAuditEntity(
       ]
         .filter(Boolean)
         .join(" · "),
-      href: `/invoices/${id}`,
+      href: recordHref("invoice-detail", row.entityId),
       linkLabel: "Open invoice",
     };
   }
@@ -110,7 +111,7 @@ export async function loadAuditEntity(
     return {
       label: text(booking, "reference") || "Booking",
       context: text(booking, "title"),
-      href: `/commercial-bookings/${id}`,
+      href: recordHref("commercial-detail", row.entityId),
       linkLabel: "Open booking",
     };
   }
@@ -170,9 +171,9 @@ export async function loadAuditEntity(
     context,
     href:
       type === "CUSTOMER"
-        ? `/customers/${id}/statement`
+        ? recordHref("customer-statement", row.entityId)
         : type === "GUEST"
-          ? `/guests/${id}/activity`
+          ? recordHref("guest-activity", row.entityId)
           : registerRoutes[resource] || `/${resource}`,
     linkLabel:
       type === "CUSTOMER"

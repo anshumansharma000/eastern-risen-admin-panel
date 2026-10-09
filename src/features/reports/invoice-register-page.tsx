@@ -1,5 +1,7 @@
 "use client";
 
+import { recordHref } from "@/lib/routes";
+
 import { Button as ClearFiltersButton } from "@/components/ui";
 import Link from "next/link";
 import {
@@ -402,7 +404,7 @@ export function InvoiceRegisterPage({
                         <td>
                           <Link
                             className="text-link"
-                            href={`/invoices/${encodeURIComponent(row.invoiceId)}`}
+                            href={recordHref("invoice-detail", row.invoiceId)}
                           >
                             <strong>
                               {row.invoiceNumber ??

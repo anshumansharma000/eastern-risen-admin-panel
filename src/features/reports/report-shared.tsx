@@ -1,5 +1,7 @@
 "use client";
 
+import { loginHref } from "@/lib/routes";
+
 import { keepPreviousData, useQueries, useQuery } from "@tanstack/react-query";
 import { Download, FilterX, Printer, Search } from "lucide-react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -60,8 +62,11 @@ export function useReportParams(defaults: ReportParams = emptyDefaults) {
   );
 
   const clear = useCallback(() => {
-    router.replace(pathname, { scroll: false });
-  }, [pathname, router]);
+    const id = search.get("id");
+    router.replace(`${pathname}${id ? `?id=${encodeURIComponent(id)}` : ""}`, {
+      scroll: false,
+    });
+  }, [pathname, router, search]);
 
   return { params, update, setFilter, clear };
 }
@@ -91,7 +96,7 @@ export function useSessionExpiry(error: unknown) {
   const pathname = usePathname();
   useEffect(() => {
     if (error instanceof ApiError && error.status === 401)
-      router.replace(`/login?returnTo=${encodeURIComponent(pathname)}`);
+      router.replace(loginHref(pathname));
   }, [error, pathname, router]);
 }
 
@@ -508,7 +513,7 @@ export function ExportCsv({
       URL.revokeObjectURL(url);
     } catch (caught) {
       if (caught instanceof ApiError && caught.status === 401) {
-        router.replace(`/login?returnTo=${encodeURIComponent(pathname)}`);
+        router.replace(loginHref(pathname));
         return;
       }
       setError(caught);

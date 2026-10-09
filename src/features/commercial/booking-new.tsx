@@ -1,4 +1,6 @@
 "use client";
+
+import { recordHref } from "@/lib/routes";
 import { useState, type FormEvent } from "react";
 import Link from "next/link";
 import { useMutation } from "@tanstack/react-query";
@@ -69,7 +71,7 @@ export function BookingNew() {
           <CustomerLink token={create.data.data.accessToken} />
           <Link
             className="button button-primary"
-            href={`/commercial-bookings/${encodeURIComponent(create.data.data.booking.id)}`}
+            href={recordHref("commercial-detail", create.data.data.booking.id)}
           >
             Continue to booking
           </Link>

@@ -1,0 +1,25 @@
+# Serve fixed pages before matching legacy record URLs.
+/invoices/new /invoices/new 200
+/invoices/new/ /invoices/new 200
+/invoices/detail /invoices/detail 200
+/invoices/detail/ /invoices/detail 200
+/invoices/edit /invoices/edit 200
+/invoices/edit/ /invoices/edit 200
+/commercial-bookings/new /commercial-bookings/new 200
+/commercial-bookings/new/ /commercial-bookings/new 200
+/commercial-bookings/detail /commercial-bookings/detail 200
+/commercial-bookings/detail/ /commercial-bookings/detail 200
+/invoices/:asset.txt /invoices/:asset.txt 200
+/invoices/:asset.html /invoices/:asset.html 200
+/commercial-bookings/:asset.txt /commercial-bookings/:asset.txt 200
+/commercial-bookings/:asset.html /commercial-bookings/:asset.html 200
+/invoices/:id/edit /invoices/edit?id=:id 302
+/invoices/:id/edit/ /invoices/edit?id=:id 302
+/invoices/:id /invoices/detail?id=:id 302
+/invoices/:id/ /invoices/detail?id=:id 302
+/commercial-bookings/:id /commercial-bookings/detail?id=:id 302
+/commercial-bookings/:id/ /commercial-bookings/detail?id=:id 302
+/customers/:id/statement /customers/statement?id=:id 302
+/customers/:id/statement/ /customers/statement?id=:id 302
+/guests/:id/activity /guests/activity?id=:id 302
+/guests/:id/activity/ /guests/activity?id=:id 302

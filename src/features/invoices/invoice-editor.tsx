@@ -1,5 +1,7 @@
 "use client";
 
+import { recordHref } from "@/lib/routes";
+
 import {
   useMutation,
   useQueries,
@@ -173,7 +175,7 @@ export function InvoiceEditor({ id }: { id?: string }) {
       clearGuard();
       setDirty(false);
       await cache.invalidateQueries({ queryKey: ["invoices"] });
-      router.push(`/invoices/${result.data.id}`);
+      router.push(recordHref("invoice-detail", result.data.id));
     },
     onError: setError,
   });
@@ -290,7 +292,7 @@ export function InvoiceEditor({ id }: { id?: string }) {
         </p>
         <Link
           className="button button-secondary"
-          href={`/invoices/${current.id}`}
+          href={recordHref("invoice-detail", current.id)}
         >
           Open invoice detail
         </Link>
@@ -302,7 +304,7 @@ export function InvoiceEditor({ id }: { id?: string }) {
         <div>
           <Link
             className="back-link"
-            href={id ? `/invoices/${id}` : "/invoices"}
+            href={id ? recordHref("invoice-detail", id) : "/invoices"}
           >
             <ArrowLeft size={16} /> Back to {id ? "invoice" : "invoices"}
           </Link>
@@ -763,7 +765,7 @@ export function InvoiceEditor({ id }: { id?: string }) {
             <span>{dirty ? "Unsaved changes" : "Ready to calculate"}</span>
             <Link
               className="button button-secondary"
-              href={id ? `/invoices/${id}` : "/invoices"}
+              href={id ? recordHref("invoice-detail", id) : "/invoices"}
             >
               Cancel
             </Link>

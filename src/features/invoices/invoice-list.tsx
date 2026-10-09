@@ -1,5 +1,7 @@
 "use client";
 
+import { recordHref } from "@/lib/routes";
+
 import Link from "next/link";
 import { Plus } from "lucide-react";
 import type { CoreRole } from "@/lib/api/contracts";
@@ -146,7 +148,10 @@ export function InvoiceList({ role }: { role: CoreRole }) {
                           <td>
                             <Link
                               className="text-link"
-                              href={`/invoices/${encodeURIComponent(invoice.invoiceId)}`}
+                              href={recordHref(
+                                "invoice-detail",
+                                invoice.invoiceId,
+                              )}
                             >
                               <strong>
                                 {invoice.invoiceNumber ?? "Draft invoice"}
@@ -187,7 +192,13 @@ export function InvoiceList({ role }: { role: CoreRole }) {
                           <td>
                             <Link
                               className="button button-ghost"
-                              href={`/invoices/${encodeURIComponent(invoice.invoiceId)}${invoice.status === "DRAFT" && can(role, "billing") ? "/edit" : ""}`}
+                              href={recordHref(
+                                invoice.status === "DRAFT" &&
+                                  can(role, "billing")
+                                  ? "invoice-edit"
+                                  : "invoice-detail",
+                                invoice.invoiceId,
+                              )}
                             >
                               {invoice.status === "DRAFT" &&
                               can(role, "billing")

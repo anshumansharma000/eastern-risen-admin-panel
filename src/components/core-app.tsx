@@ -1,5 +1,7 @@
 "use client";
 
+import { loginHref } from "@/lib/routes";
+
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
@@ -73,7 +75,7 @@ export function CoreApp({ view, id }: { view: CoreView; id?: string }) {
       session.isError &&
       (session.error as { status?: number }).status === 401
     )
-      router.replace(`/login?returnTo=${encodeURIComponent(pathname)}`);
+      router.replace(loginHref(pathname));
   }, [session.isError, session.error, router, pathname]);
   if (session.isLoading)
     return (

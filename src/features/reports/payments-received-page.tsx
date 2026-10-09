@@ -1,5 +1,7 @@
 "use client";
 
+import { recordHref } from "@/lib/routes";
+
 import { Fragment, useRef, useState } from "react";
 import Link from "next/link";
 import {
@@ -604,7 +606,10 @@ export function PaymentsReceivedPage({
                               {row.bookingId ? (
                                 <Link
                                   className="text-link"
-                                  href={`/commercial-bookings/${encodeURIComponent(row.bookingId)}`}
+                                  href={recordHref(
+                                    "commercial-detail",
+                                    row.bookingId,
+                                  )}
                                 >
                                   {row.bookingReference || "View booking"}
                                 </Link>
@@ -615,7 +620,10 @@ export function PaymentsReceivedPage({
                                 {row.invoiceId ? (
                                   <Link
                                     className="text-link"
-                                    href={`/invoices/${encodeURIComponent(row.invoiceId)}`}
+                                    href={recordHref(
+                                      "invoice-detail",
+                                      row.invoiceId,
+                                    )}
                                   >
                                     {row.invoiceNumber || "View invoice"}
                                   </Link>

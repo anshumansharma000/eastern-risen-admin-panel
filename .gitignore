@@ -16,6 +16,7 @@
 # next.js
 /.next/
 /out/
+/.wrangler/
 
 # production
 /build
@@ -41,3 +42,8 @@ yarn-error.log*
 next-env.d.ts
 *.md
 *.example
+
+# Deployment instructions
+!DEPLOYMENT.md
+*.md
+

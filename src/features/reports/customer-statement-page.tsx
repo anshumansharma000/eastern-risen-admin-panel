@@ -1,5 +1,7 @@
 "use client";
 
+import { recordHref } from "@/lib/routes";
+
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { api, queryString } from "@/lib/api/client";
@@ -245,7 +247,10 @@ export function CustomerStatementPage({
                           {entry.type === "INVOICE" ? (
                             <Link
                               className="text-link"
-                              href={`/invoices/${encodeURIComponent(entry.documentId)}`}
+                              href={recordHref(
+                                "invoice-detail",
+                                entry.documentId,
+                              )}
                             >
                               {entry.documentNumber ?? "—"}
                             </Link>

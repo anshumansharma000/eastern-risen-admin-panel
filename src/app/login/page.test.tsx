@@ -17,9 +17,13 @@ vi.mock("@/lib/api/client", async (importActual) => {
   const actual = await importActual<typeof import("@/lib/api/client")>();
   return { ...actual, api: vi.fn() };
 });
+const navigation = vi.hoisted(() => ({
+  replace: vi.fn(),
+  search: new URLSearchParams(),
+}));
 vi.mock("next/navigation", () => ({
-  useRouter: () => ({ replace: vi.fn() }),
-  useSearchParams: () => new URLSearchParams(),
+  useRouter: () => ({ replace: navigation.replace }),
+  useSearchParams: () => navigation.search,
 }));
 
 function submitLogin(error: ApiError) {
@@ -41,6 +45,7 @@ function submitLogin(error: ApiError) {
 afterEach(() => {
   cleanup();
   vi.clearAllMocks();
+  navigation.search = new URLSearchParams();
 });
 
 describe("sign-in failures", () => {
@@ -68,4 +73,28 @@ describe("sign-in failures", () => {
       "Sensitive backend detail",
     );
   });
+});
+
+it("opens the exact record destination after successful sign in", async () => {
+  navigation.search = new URLSearchParams({
+    returnTo: "/invoices/edit?id=invoice-1",
+  });
+  vi.mocked(api).mockResolvedValue({});
+  render(
+    <QueryClientProvider client={new QueryClient()}>
+      <LoginPage />
+    </QueryClientProvider>,
+  );
+  fireEvent.change(screen.getByLabelText("Username"), {
+    target: { value: "staff" },
+  });
+  fireEvent.change(screen.getByLabelText("Password"), {
+    target: { value: "secret" },
+  });
+  fireEvent.click(screen.getByRole("button", { name: /sign in/i }));
+  await waitFor(() =>
+    expect(navigation.replace).toHaveBeenCalledWith(
+      "/invoices/edit?id=invoice-1",
+    ),
+  );
 });

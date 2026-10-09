@@ -12,7 +12,6 @@ afterEach(() => {
 function Guarded({ saving = false }: { saving?: boolean }) {
   useFormGuard(true, saving);
   // A raw anchor exercises the document-level guard independently of Next routing.
-  // eslint-disable-next-line @next/next/no-html-link-for-pages
   return <a href="/invoices">Leave</a>;
 }
 it("keeps unsaved work when navigation is rejected", () => {

@@ -1,0 +1,5 @@
+import { RecordPage } from "@/components/record-page";
+
+export default function Page() {
+  return <RecordPage view="invoice-edit" />;
+}

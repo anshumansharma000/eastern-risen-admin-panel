@@ -358,7 +358,7 @@ describe("commercial booking detail", () => {
     );
     expect(
       await screen.findByRole("link", { name: "ER/2627/1" }),
-    ).toHaveAttribute("href", "/invoices/invoice-1");
+    ).toHaveAttribute("href", "/invoices/detail?id=invoice-1");
     expect(commercialApi.detail).toHaveBeenCalledTimes(2);
     expect(commercialApi.availableInvoices).toHaveBeenCalledTimes(2);
     expect(

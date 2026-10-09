@@ -1,5 +1,7 @@
 "use client";
 
+import { recordHref } from "@/lib/routes";
+
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
@@ -404,7 +406,7 @@ export function PaymentReviewDialog({
                         if (locked) event.preventDefault();
                       }}
                       className="text-link"
-                      href={`/commercial-bookings/${encodeURIComponent(current.booking.id)}`}
+                      href={recordHref("commercial-detail", current.booking.id)}
                     >
                       {current.booking.reference}
                     </Link>
@@ -427,7 +429,7 @@ export function PaymentReviewDialog({
                         if (locked) event.preventDefault();
                       }}
                       className="text-link"
-                      href={`/invoices/${encodeURIComponent(current.invoice.id)}`}
+                      href={recordHref("invoice-detail", current.invoice.id)}
                     >
                       {current.invoice.number || "View invoice"}
                     </Link>
@@ -849,7 +851,7 @@ function ReceiptFacts({
           if (locked) event.preventDefault();
         }}
         className="text-link"
-        href={`/invoices/${encodeURIComponent(receipt.invoiceId)}`}
+        href={recordHref("invoice-detail", receipt.invoiceId)}
       >
         {receipt.number}
       </Link>{" "}

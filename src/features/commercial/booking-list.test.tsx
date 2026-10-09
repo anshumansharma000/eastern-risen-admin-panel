@@ -105,7 +105,7 @@ it("renders exact backend balances without adding gateway amounts", async () => 
   expect(screen.getByText("₹869.70")).toBeInTheDocument();
   expect(screen.getByRole("link", { name: "ER/1" })).toHaveAttribute(
     "href",
-    "/invoices/invoice-1",
+    "/invoices/detail?id=invoice-1",
   );
   expect(screen.getByRole("button", { name: "Next" })).toBeDisabled();
 });

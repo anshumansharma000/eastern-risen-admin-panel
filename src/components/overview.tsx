@@ -1,5 +1,7 @@
 "use client";
 
+import { recordHref } from "@/lib/routes";
+
 import { useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { AlertTriangle, FilePlus2 } from "lucide-react";
@@ -405,7 +407,10 @@ export function Overview({ role }: { role: CoreRole }) {
                         <td>
                           <Link
                             className="text-link"
-                            href={`/customers/${encodeURIComponent(item.customerId)}/statement`}
+                            href={recordHref(
+                              "customer-statement",
+                              item.customerId,
+                            )}
                           >
                             {item.customerName}
                           </Link>

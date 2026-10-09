@@ -1,4 +1,6 @@
 "use client";
+
+import { recordHref } from "@/lib/routes";
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import type { CoreRole } from "@/lib/api/contracts";
@@ -232,7 +234,7 @@ export function BookingList({ role }: { role: CoreRole }) {
                       {booking.invoiceId ? (
                         <Link
                           className="text-link"
-                          href={`/invoices/${encodeURIComponent(booking.invoiceId)}`}
+                          href={recordHref("invoice-detail", booking.invoiceId)}
                         >
                           {booking.invoiceNumber ?? "Draft invoice"}
                         </Link>
@@ -253,7 +255,7 @@ export function BookingList({ role }: { role: CoreRole }) {
                     <td>
                       <Link
                         className="text-link"
-                        href={`/commercial-bookings/${encodeURIComponent(booking.id)}`}
+                        href={recordHref("commercial-detail", booking.id)}
                       >
                         View booking
                       </Link>

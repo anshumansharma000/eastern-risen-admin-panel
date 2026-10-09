@@ -1,5 +1,7 @@
 "use client";
 
+import { recordHref } from "@/lib/routes";
+
 import Link from "next/link";
 import { useQuery } from "@tanstack/react-query";
 import {
@@ -68,7 +70,10 @@ export function GuestActivity({ id }: { id: string }) {
               </ul>
               <Link
                 className="button button-secondary"
-                href={`/invoices/${activity.lastService.invoiceId}`}
+                href={recordHref(
+                  "invoice-detail",
+                  activity.lastService.invoiceId,
+                )}
               >
                 Open invoice <ArrowRight size={16} />
               </Link>
@@ -89,7 +94,10 @@ export function GuestActivity({ id }: { id: string }) {
               <p>{activity.lastPayment.date}</p>
               <Link
                 className="button button-secondary"
-                href={`/invoices/${activity.lastPayment.invoiceId}`}
+                href={recordHref(
+                  "invoice-detail",
+                  activity.lastPayment.invoiceId,
+                )}
               >
                 Open invoice <ArrowRight size={16} />
               </Link>

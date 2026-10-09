@@ -1,4 +1,6 @@
 "use client";
+
+import { recordHref } from "@/lib/routes";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -558,7 +560,7 @@ export function BookingDetailPage({
                 <div>
                   <Link
                     className="text-link"
-                    href={`/invoices/${encodeURIComponent(d.invoice.id)}`}
+                    href={recordHref("invoice-detail", d.invoice.id)}
                   >
                     <strong>
                       {d.invoice.invoiceNumber ?? "Draft invoice"}

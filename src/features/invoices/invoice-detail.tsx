@@ -1,5 +1,7 @@
 "use client";
 
+import { recordHref } from "@/lib/routes";
+
 import Link from "next/link";
 import Image from "next/image";
 import {
@@ -225,7 +227,7 @@ export function InvoiceDetail({ id, role }: { id: string; role: CoreRole }) {
             <>
               <Link
                 className="button button-secondary"
-                href={`/invoices/${id}/edit`}
+                href={recordHref("invoice-edit", id)}
               >
                 <FilePenLine size={17} /> Edit
               </Link>

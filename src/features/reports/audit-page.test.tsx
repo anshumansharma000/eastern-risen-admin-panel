@@ -173,7 +173,7 @@ it("shows invoice number and customer context, with untruncated IDs in event det
   ).toBeInTheDocument();
   expect(screen.getByRole("link", { name: "Open invoice" })).toHaveAttribute(
     "href",
-    `/invoices/${entityId}`,
+    `/invoices/detail?id=${entityId}`,
   );
   fireEvent.click(screen.getByText("Event details"));
   expect(screen.getByText(entityId)).toBeVisible();
@@ -201,7 +201,7 @@ it("looks up a repeated record only once and resolves booking references", async
   expect(screen.getAllByText("Coastal tour")).toHaveLength(2);
   expect(
     screen.getAllByRole("link", { name: "Open booking" })[0],
-  ).toHaveAttribute("href", "/commercial-bookings/booking-1");
+  ).toHaveAttribute("href", "/commercial-bookings/detail?id=booking-1");
 });
 it("keeps full IDs accessible for deleted records without losing the audit event", async () => {
   const entityId = "deleted-customer-22222222-2222-4222-8222-222222222222";

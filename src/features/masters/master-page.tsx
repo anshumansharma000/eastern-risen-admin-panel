@@ -1,5 +1,7 @@
 "use client";
 
+import { recordHref } from "@/lib/routes";
+
 import Link from "next/link";
 import {
   useMutation,
@@ -362,7 +364,7 @@ export function MasterPage({
                             {config.resource === "guests" ? (
                               <Link
                                 className="text-link"
-                                href={`/guests/${encodeURIComponent(record.id)}/activity`}
+                                href={recordHref("guest-activity", record.id)}
                               >
                                 {display(record[column])}
                               </Link>
@@ -412,7 +414,7 @@ export function MasterPage({
                         {config.resource === "customers" && (
                           <Link
                             className="button button-ghost"
-                            href={`/customers/${encodeURIComponent(record.id)}/statement`}
+                            href={recordHref("customer-statement", record.id)}
                           >
                             Statement
                           </Link>

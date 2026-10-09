@@ -239,7 +239,7 @@ it("renders unreceipted review orders, direct calendar dates, India timestamps a
   );
   expect(within(row).getByRole("link", { name: "Test12" })).toHaveAttribute(
     "href",
-    "/commercial-bookings/booking-1",
+    "/commercial-bookings/detail?id=booking-1",
   );
   fireEvent.click(within(row).getByRole("button", { name: "View details" }));
   const details = screen.getByRole("region", { name: "Payment details" });
