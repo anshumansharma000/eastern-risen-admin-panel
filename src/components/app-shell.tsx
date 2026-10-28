@@ -15,6 +15,8 @@ import {
   Hotel,
   LogOut,
   Menu,
+  Megaphone,
+  Inbox,
   Percent,
   ScrollText,
   ReceiptIndianRupee,
@@ -34,6 +36,7 @@ import { confirmFormLeave } from "./form-guard";
 
 const nav = [
   { label: "Overview", href: "/", icon: Gauge },
+  { label: "Inquiries", href: "/inquiries", icon: Inbox },
   { label: "Invoices", href: "/invoices", icon: FileText },
   {
     label: "Bookings & quotes",
@@ -76,6 +79,12 @@ const nav = [
   { label: "Vendors", href: "/vendors", icon: Building2 },
   { label: "Vehicles", href: "/vehicles", icon: CarFront },
   { heading: "Configuration" },
+  {
+    label: "Website announcements",
+    href: "/configuration/announcements",
+    icon: Megaphone,
+    capability: "writeConfiguration",
+  },
   {
     label: "Payment policy",
     href: "/configuration/payment-policy",

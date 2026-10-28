@@ -1,4 +1,10 @@
 "use client";
+import { AnnouncementsPage } from "@/features/announcements/announcements-page";
+
+import {
+  InquiriesPage,
+  InquiryDetail,
+} from "@/features/inquiries/inquiries-page";
 
 import { loginHref } from "@/lib/routes";
 
@@ -35,6 +41,9 @@ import { BookingDetailPage } from "@/features/commercial/booking-detail";
 import { PolicyPage } from "@/features/commercial/policy-page";
 
 export type CoreView =
+  | "inquiries"
+  | "inquiry-detail"
+  | "announcements"
   | "overview"
   | "invoices"
   | "invoice-new"
@@ -127,7 +136,11 @@ export function CoreApp({ view, id }: { view: CoreView; id?: string }) {
     );
   const role = session.user.role;
   let content = <Overview role={role} />;
-  if (view === "invoices") content = <InvoiceList role={role} />;
+  if (view === "announcements")
+    content = role === "CORE_ADMIN" ? <AnnouncementsPage /> : <Forbidden />;
+  else if (view === "inquiries") content = <InquiriesPage />;
+  else if (view === "inquiry-detail" && id) content = <InquiryDetail id={id} />;
+  else if (view === "invoices") content = <InvoiceList role={role} />;
   else if (view === "invoice-new")
     content = role === "CORE_REPORT_VIEWER" ? <Forbidden /> : <InvoiceEditor />;
   else if (view === "invoice-edit")

@@ -1,4 +1,5 @@
 export type RecordView =
+  | "inquiry-detail"
   | "invoice-detail"
   | "invoice-edit"
   | "commercial-detail"
@@ -9,6 +10,7 @@ export const recordRoutes: Record<
   RecordView,
   { path: string; register: string }
 > = {
+  "inquiry-detail": { path: "/inquiries/detail", register: "/inquiries" },
   "invoice-detail": { path: "/invoices/detail", register: "/invoices" },
   "invoice-edit": { path: "/invoices/edit", register: "/invoices" },
   "commercial-detail": {
